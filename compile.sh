@@ -133,7 +133,7 @@ dir=$(pwd)
 cd "$(dirname "$0")"
 
 source config
-insert_line "NUM THREADS" "let num_threads = ${number_of_threads}" pelecan/src/main.rs
+insert_line "NUM THREADS" "let num_threads = ${number_of_threads};" pelecan/src/main.rs
 
 for server_name in $(ls servers); do
 	server=servers/$server_name
