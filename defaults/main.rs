@@ -1,5 +1,6 @@
 mod servers;
 mod modules;
+mod persistent_trait;
 
 use murmur_grpc::*;
 use persistent_trait::Persistent;
