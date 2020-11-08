@@ -132,6 +132,8 @@ touch pelecan/src/servers/mod.rs
 dir=$(pwd)
 cd "$(dirname "$0")"
 
+./setup.sh
+
 source config
 insert_line "NUM THREADS" "let num_threads = ${number_of_threads};" pelecan/src/main.rs
 
