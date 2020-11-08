@@ -7,8 +7,8 @@ A framework for extending Mumble servers with Rust (based on [murmur_grpc](https
 
 ### Usage
 
-* Server configuration instructions (coming soon)
-* Module creation instructions (coming soon)
+* [Server configuration instructions](server_configuration.md) (coming soon)
+* [Module creation instructions](writing_modules.md) (coming soon)
 
 #### Overview
 
