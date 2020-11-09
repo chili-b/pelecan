@@ -1,5 +1,5 @@
 use serde_derive::{Serialize, Deserialize};
-
+use confy::ConfyError;
 use crate::Persistent;
 
 // MAKE ALL FIELDS PUBLIC
@@ -56,7 +56,7 @@ impl Data {
         }
     }
 
-    pub fn store(&self) {
-        self.persistent_data.store(&self.name);
+    pub fn store(&self) -> Result<(), ConfyError> {
+        self.persistent_data.store(&self.name)
     }
 }
