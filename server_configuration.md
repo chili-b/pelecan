@@ -1,4 +1,4 @@
-To create a server, create a subdirectory under the `servers` directory. The name of this directory will
+To connect to a server, create a subdirectory under the `servers` directory. The name of this directory will
 be the name pelecan uses to identify the server. Inside this directory, create two files: `enabled_modules`
 and `config`. 
 
