@@ -1,4 +1,6 @@
 use crate::*;
+mod data;
+use data::Data;
 
 // MODULES //
 
