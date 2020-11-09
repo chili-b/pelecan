@@ -6,6 +6,7 @@ use crate::Persistent;
 // MAKE ALL FIELDS PUBLIC
 
 // DATA THAT IS ONLY IN MEMORY
+#[derive(Clone)]
 pub struct VolatileData {
     // VOLATILE DATA FIELDS //
 }
@@ -19,7 +20,7 @@ impl VolatileData {
 }
 
 // DATA THAT IS STORED ON DISK
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PersistentData {
     // PERSISTENT DATA FIELDS //
 }
@@ -40,6 +41,7 @@ impl std::default::Default for PersistentData {
     }
 }
 
+#[derive(Clone)]
 pub struct Data {
     pub volatile_data: VolatileData,
     pub persistent_data: PersistentData,
