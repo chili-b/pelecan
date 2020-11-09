@@ -5,11 +5,11 @@ function enable_module {
 	server="$2"
 	if test -d modules/$module; then
 		echo "found module '${module}'"
-		if ! grep -q "$module" pelecan/src/modules/mod.rs; then
-			echo "pub mod $module;" >> pelecan/src/modules/mod.rs
-			cp -r modules/$module pelecan/src/modules/
-		fi
-		insert_line "MODULES" "use crate::modules::${module};" pelecan/src/servers/${server}/mod.rs
+		#if ! grep -q "$module" pelecan/src/modules/mod.rs; then
+		#	echo "pub mod $module;" >> pelecan/src/modules/mod.rs
+		#	cp -r modules/$module pelecan/src/servers/${server}/
+		#fi
+		insert_line "MODULES" "mod ${module};" pelecan/src/servers/${server}/mod.rs
 		reset_module_variables
 		source modules/$module/module
 		# add dependencies
@@ -68,13 +68,14 @@ function insert_module_functions {
 }
 
 function add_data_variable {
-	data_type=$1
-	variable=$2
+	data_type="$1"
+	variable="$2"
+	server="$3"
 	var_name=$(echo $variable | cut -f 1 -d : | xargs echo)
-	var_type=$(echo $variable | cut -f 2 -d : | cut -f 1 -d = | xargs echo)
+	var_type=$(echo $variable | cut -f 2 -d : | cut -f 1 -d = | xargs echo)v
 	var_value=$(echo $variable | cut -f 2 -d = | xargs echo)
-	insert_line "${data_type} DATA FIELDS" "${var_name}: ${var_type}," "pelecan/src/data.rs"
-	insert_line "${data_type} DATA VALUES" "${var_name}: ${var_value}," "pelecan/src/data.rs"
+	insert_line "${data_type} DATA FIELDS" "${var_name}: ${var_type}," "pelecan/src/servers/${server}/data.rs"
+	insert_line "${data_type} DATA VALUES" "${var_name}: ${var_value}," "pelecan/src/servers/${server}/data.rs"
 }
 
 function add_dependency {
@@ -122,8 +123,6 @@ cp defaults/main.rs pelecan/src/main.rs
 
 cp defaults/persistent_trait.rs pelecan/src/persistent_trait.rs
 
-cp defaults/data.rs pelecan/src/data.rs
-
 rm -r pelecan/src/modules/* 2&> /dev/null
 touch pelecan/src/modules/mod.rs
 
@@ -141,6 +140,7 @@ for server_name in $(ls servers); do
 	if test -d $server && test -f $server/config && test -f $server/enabled_modules; then
 		mkdir pelecan/src/servers/"$server_name"
 		cp defaults/server.rs pelecan/src/servers/"$server_name"/mod.rs
+		cp defaults/data.rs pelecan/src/servers/"$server_name"/data.rs
 		reset_server_variables
 		source "$server/config"
 		echo "pub mod ${server_name};" >> pelecan/src/servers/mod.rs
