@@ -11,7 +11,7 @@ pub fn murmur_interface() -> MurmurInterface<&'static str, Data> {
     let server_addr = "http://127.0.0.1:50051"
     // SERVER ADDR
     MurmurInterface {
-        t: DataMutex::new(Data::load(name)),
+        t: DataMutex::new(Data::new(name)),
         addr: server_addr,
         server_id: server_id,
         user_connected: vec![
