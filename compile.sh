@@ -123,16 +123,14 @@ cp defaults/main.rs pelecan/src/main.rs
 
 cp defaults/persistent_trait.rs pelecan/src/persistent_trait.rs
 
-rm -r pelecan/src/modules/*
+rm -r pelecan/src/modules/* 2&> /dev/null
 touch pelecan/src/modules/mod.rs
 
-rm -r pelecan/src/servers/*
+rm -r pelecan/src/servers/* 2&> /dev/null
 touch pelecan/src/servers/mod.rs
 
 dir=$(pwd)
 cd "$(dirname "$0")"
-
-./setup.sh
 
 source config
 insert_line "NUM THREADS" "let num_threads = ${number_of_threads};" pelecan/src/main.rs
