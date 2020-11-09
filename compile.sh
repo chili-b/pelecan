@@ -6,7 +6,7 @@ function enable_module {
 	if test -d modules/$module; then
 		echo "found module '${module}'"
 		if ! grep -q "$module" pelecan/src/modules/mod.rs; then
-			echo "pub use $module;" >> pelecan/src/modules/mod.rs
+			echo "pub mod $module;" >> pelecan/src/modules/mod.rs
 			cp -r modules/$module pelecan/src/modules/
 		fi
 		insert_line "MODULES" "use crate::modules::${module};" pelecan/src/servers/${server}/mod.rs
