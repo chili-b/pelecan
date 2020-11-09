@@ -56,6 +56,6 @@ impl Data {
     }
 
     pub fn store(&self) {
-        self.persistent_data.store(self.name);
+        self.persistent_data.store(&self.name);
     }
 }
