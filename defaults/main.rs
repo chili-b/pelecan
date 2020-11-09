@@ -1,9 +1,11 @@
 mod servers;
 mod modules;
 mod persistent_trait;
+mod data;
 
 use murmur_grpc::*;
 use persistent_trait::Persistent;
+use data::Data;
 
 fn main() {
     // NUM THREADS
