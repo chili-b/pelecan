@@ -6,7 +6,7 @@ pub mod persistent_trait;
 pub use murmur_grpc::*;
 pub use persistent_trait::Persistent;
 //pub use data::Data;
-pub type FutureBool = Box<Future<Item = bool>>;
+//pub type FutureBool = Box<Future<Item = bool>>;
 
 fn main() {
     // NUM THREADS
