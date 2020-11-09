@@ -9,6 +9,7 @@ function enable_module {
 		#	echo "pub mod $module;" >> pelecan/src/modules/mod.rs
 		#	cp -r modules/$module pelecan/src/servers/${server}/
 		#fi
+		cp -r modules/$module pelecan/src/servers/${server}/
 		insert_line "MODULES" "mod ${module};" pelecan/src/servers/${server}/mod.rs
 		reset_module_variables
 		source modules/$module/module
