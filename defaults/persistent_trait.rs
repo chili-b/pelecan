@@ -1,5 +1,5 @@
 use confy;
-use serde_derive::{Serialize, Deserialize};
+//use serde_derive::{Serialize, Deserialize};
 
 pub trait Persistent: serde::ser::Serialize + serde::de::DeserializeOwned + std::marker::Sized + std::default::Default {
     fn load(name: &str) -> Self {
