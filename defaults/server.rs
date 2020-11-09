@@ -13,7 +13,7 @@ pub fn murmur_interface() -> MurmurInterface<&'static str, Data> {
     // SERVER ADDR
     MurmurInterface {
         t: DataMutex::new(Data::load(name)),
-        addr: addr,
+        addr: server_addr,
         server_id: server_id,
         user_connected: vec![
             // USER CONNECTED
