@@ -5,11 +5,8 @@ use data::Data;
 // MODULES //
 
 pub fn murmur_interface() -> MurmurInterface<&'static str, Data> {
-    let name = "server";
     // SERVER NAME
-    let server_id = 1;
     // SERVER ID
-    let server_addr = "http://127.0.0.1:50051";
     // SERVER ADDR
     MurmurInterface {
         t: DataMutex::new(Data::new(name)),
