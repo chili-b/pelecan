@@ -1,5 +1,7 @@
 # pelecan
-A framework for extending Mumble servers with Rust <sub><sup>(based on [murmur_grpc](https://github.com/chili-b/murmur_grpc)).</sup></sub>
+A framework for extending Mumble servers with Rust.
+
+<sub><sup>(based on [murmur_grpc](https://github.com/chili-b/murmur_grpc))</sup></sub>
 
 ### Required Software
 * [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
