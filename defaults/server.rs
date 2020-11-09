@@ -4,7 +4,7 @@ use crate::modules;
 
 // MODULES //
 
-pub fn murmur_interface() -> MurmurInterface<&str, Data> {
+pub fn murmur_interface() -> MurmurInterface<&'static str, Data> {
     let name = "server";
     // SERVER NAME
     let server_id = 1;
