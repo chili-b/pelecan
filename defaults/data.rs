@@ -1,4 +1,3 @@
-use confy;
 use serde_derive::{Serialize, Deserialize};
 
 use crate::Persistent;
