@@ -5,7 +5,7 @@ pub mod persistent_trait;
 
 pub use murmur_grpc::*;
 pub use persistent_trait::Persistent;
-pub use data::Data;
+//pub use data::Data;
 
 fn main() {
     // NUM THREADS
