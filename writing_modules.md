@@ -46,4 +46,11 @@ volatile_data=(
 persistent_data=(
 'this_will_be_saved_to_disk: i32 = 0'
 )
+
+# Cargo dependencies
+
+dependencies=(
+'some_crate_i_need = "1.0"'
+'another_crate_i_need = "^0.7"'
+)
 ```
