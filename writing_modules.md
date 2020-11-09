@@ -1,3 +1,5 @@
+Example modules can be seen [here](https://github.com/chili-b/pelecan-modules)
+
 Example module configuration
 ```bash
 # Event handling functions
