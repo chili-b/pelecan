@@ -157,6 +157,7 @@ done
 
 cd pelecan
 cargo build --release
+killall pelecan
 cp target/release/pelecan ../bin/pelecan
 cd ../
 strip bin/pelecan
