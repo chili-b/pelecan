@@ -16,7 +16,8 @@ server_address="http://127.0.0.1:50051"
 
 `enabled_modules` should contain the name of a single subdirectory of the `/modules` directory on each line. 
 If `/modules` contained directories `module_1`, `module_2` and `module_3`, in order to enable modules 2 and 
-3 for a server called 'server_1' the contents of `servers/server_1/enabled_modules` would be:
+3 for a server called 'server_1' the contents of the text file located at `servers/server_1/enabled_modules` 
+would be:
 
 ```bash
 module_2
