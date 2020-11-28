@@ -13,7 +13,7 @@ A framework for extending Mumble servers with Rust. <sub><sup>(based on [murmur_
 * [Server configuration instructions](server_configuration.md)
 * [Module creation instructions](writing_modules.md) (WIP)
 
-#### Overview
+### Overview
 
 Run `setup.sh` to create the required directories. The `servers` directory is where configuration files
 for connections to Mumble servers (physical and virtual) are to be placed. The `modules` directory is where
