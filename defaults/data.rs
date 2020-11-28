@@ -1,6 +1,8 @@
 use serde_derive::{Serialize, Deserialize};
 use confy::ConfyError;
 use crate::Persistent;
+use dirs;
+use std::path::PathBuf;
 
 // MAKE ALL FIELDS PUBLIC
 
@@ -44,19 +46,21 @@ impl std::default::Default for PersistentData {
 pub struct Data {
     pub volatile_data: VolatileData,
     pub persistent_data: PersistentData,
-    pub name: String,
+    pub path: PathBuf,
 }
 
 impl Data {
     pub fn new(name: &str) -> Self {
+        let local_data_path = dirs::data_local_dir().unwrap();
+        let path = local_data_path.join(format!("pelecan/{}", name));
         Self {
             volatile_data: VolatileData::new(),
-            persistent_data: PersistentData::load(name),
-            name: name.to_owned()
+            persistent_data: PersistentData::load(path.join("persistent_data.toml")),
+            path: path
         }
     }
 
     pub fn store(&self) -> Result<(), ConfyError> {
-        self.persistent_data.store(&self.name)
+        self.persistent_data.store(&self.path.join("persistent_data.toml"))
     }
 }

@@ -12,6 +12,7 @@ pub fn murmur_interface() -> MurmurInterface<&'static str, Data> {
         t: DataMutex::new(Data::new(name)),
         addr: server_addr,
         server_id: server_id,
+        auto_reconnect: true,
         user_connected: vec![
             // USER CONNECTED
         ],

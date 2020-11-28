@@ -5,10 +5,6 @@ function enable_module {
 	server="$2"
 	if test -d modules/$module; then
 		echo "found module '${module}'"
-		#if ! grep -q "$module" pelecan/src/modules/mod.rs; then
-		#	echo "pub mod $module;" >> pelecan/src/modules/mod.rs
-		#	cp -r modules/$module pelecan/src/servers/${server}/
-		#fi
 		cp -r modules/$module pelecan/src/servers/${server}/
 		insert_line "MODULES" "mod ${module};" pelecan/src/servers/${server}/mod.rs
 		reset_module_variables
@@ -42,16 +38,22 @@ function enable_module {
 		# authenticators
 		insert_module_functions "$module" "AUTHENTICATORS" "$server" "${authenticators[@]}"
 		# context actions
-		for context_action_function in "${!context_actions[@]}"; do
+		module_file="pelecan/src/servers/${server}/mod.rs"
+		for context_action_name in "${!context_actions[@]}"; do
+			context_action_function="${module}::${context_action_name}"
 			if ! grep -q "$context_action_function" pelecan/src/servers/${server}/mod.rs; then
-				insert_line "CONTEXT ACTIONS" "(${module}::${context_action_function}(), vec![\\n// CONTEXT ACTION ${module}::${context_action_function}\\n])," "pelecan/src/servers/${server}/mod.rs"
+				insert_line "CONTEXT ACTIONS" \
+					"(${context_action_function}(), vec![\\n// CONTEXT ACTION ${context_action_function}\\n])," \
+					"${module_file}"
 			fi
-			for context_action_handler in ${context_actions[$context_action_function]}; do
-				insert_line "CONTEXT ACTION ${module}::${context_action_function}" "$module::$context_action_handler," "pelecan/src/servers/${server}/mod.rs"
+			for context_action_handler in ${context_actions[$context_action_name]}; do
+				insert_line "CONTEXT ACTION ${context_action_function}" \
+					"$module::$context_action_handler," \
+					"${module_file}"
 			done
 		done
 	else
-		echo "no module named '${module}' found"
+		echo "no module named '${module}'"
 	fi
 }
 
@@ -61,9 +63,10 @@ function insert_module_functions {
 	server="$3"
 	shift; shift; shift
 	function_array=("$@")
+	module_file="pelecan/src/servers/${server}/mod.rs"
 	for function in "${function_array[@]}"; do
 		if ! test -z "$function"; then
-			insert_line "$pattern" "${module}::${function}," "pelecan/src/servers/${server}/mod.rs"
+			insert_line "$pattern" "${module}::${function}," "$module_file"
 		fi
 	done
 }
@@ -137,6 +140,7 @@ source config
 insert_line "NUM THREADS" "let num_threads = ${number_of_threads};" pelecan/src/main.rs
 
 for server_name in $(ls servers); do
+	module_file="pelecan/src/servers/${server_name}/mod.rs"
 	server=servers/$server_name
 	if test -d $server && test -f $server/config && test -f $server/enabled_modules; then
 		mkdir pelecan/src/servers/"$server_name"
@@ -145,10 +149,10 @@ for server_name in $(ls servers); do
 		reset_server_variables
 		source "$server/config"
 		echo "pub mod ${server_name};" >> pelecan/src/servers/mod.rs
-		insert_line "SERVER NAME" "let name = \"${server_name}\";" "pelecan/src/servers/${server_name}/mod.rs"
-		insert_line "SERVER ID" "let server_id = ${server_id};" "pelecan/src/servers/${server_name}/mod.rs"
-		insert_line "SERVER ADDR" "let server_addr = \"${server_address}\";" "pelecan/src/servers/${server_name}/mod.rs"
-		insert_line "ADD SERVERS TO THREAD POOL" "add_connection_to_thread_pool(&thread_pool, servers::${server_name}::murmur_interface());" "pelecan/src/main.rs"
+		insert_line "SERVER NAME" "let name = \"${server_name}\";" "${module_file}"
+		insert_line "SERVER ID" "let server_id = ${server_id};" "${module_file}"
+		insert_line "SERVER ADDR" "let server_addr = \"${server_address}\";" "${module_file}"
+		insert_line "ADD SERVERS TO THREAD POOL" "add_connection_to_thread_pool(&thread_pool, servers::${server_name}::murmur_interface(), None);" "pelecan/src/main.rs"
 		while IFS= read -r line; do
 			enable_module "$line" "$server_name"
 		done < "$server/enabled_modules"
