@@ -1,12 +1,8 @@
 pub mod servers;
-//pub mod modules;
 pub mod persistent_trait;
-//pub mod data;
 
 pub use murmur_grpc::*;
 pub use persistent_trait::Persistent;
-//pub use data::Data;
-//pub type FutureBool = Box<Future<Item = bool>>;
 
 fn main() {
     // NUM THREADS
