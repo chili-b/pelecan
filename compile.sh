@@ -75,10 +75,10 @@ function add_data_variable {
 	data_type="$1"
 	variable="$2"
 	server="$3"
-	var_name=$(echo $variable | cut -f 1 -d : | xargs echo)
-	var_type=$(echo $variable | cut -f 2 -d : | cut -f 1 -d = | xargs echo)v
+	var_name=$(echo $variable | awk -F': ' '{print $1}' | xargs echo)
+	var_type=$(echo $variable | awk -F': ' '{print $2}' | cut -f 1 -d = | xargs echo)
 	var_value=$(echo $variable | cut -f 2 -d = | xargs echo)
-	insert_line "${data_type} DATA FIELDS" "${var_name}: ${var_type}," "pelecan/src/servers/${server}/data.rs"
+	insert_line "${data_type} DATA FIELDS" "pub ${var_name}: ${var_type}," "pelecan/src/servers/${server}/data.rs"
 	insert_line "${data_type} DATA VALUES" "${var_name}: ${var_value}," "pelecan/src/servers/${server}/data.rs"
 }
 
