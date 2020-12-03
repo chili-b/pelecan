@@ -43,5 +43,9 @@ pub fn murmur_interface() -> MurmurInterface<&'static str, Data> {
         context_actions: vec![
             // CONTEXT ACTIONS
         ],
+        server_connected: vec![
+        ],
+        server_disconnected: vec![
+        ],
     }
 }
