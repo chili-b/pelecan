@@ -7,6 +7,7 @@ A framework for extending Mumble servers with Rust.
 
 ### Required Software
 * [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+  * make sure you have rustfmt as well (can be installed with `rustup component add rustfmt`)
 * bash
 
 ### Usage
