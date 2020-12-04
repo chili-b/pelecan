@@ -10,7 +10,9 @@ A framework for extending Mumble servers with Rust.
   * make sure you have rustfmt as well (can be installed with `rustup component add rustfmt`)
 * bash (to run the `compile.sh` script)
 
-Pelecan outputs a single mostly statically linked binary once you've compiled it with your given modules.
+Pelecan outputs a single mostly statically linked binary once you've compiled it with your given modules, 
+so if you compile it locally you should be able to drop it onto a server with the same CPU architecture 
+and operating system without headaches.
 
 ### Usage
 
