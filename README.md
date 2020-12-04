@@ -5,10 +5,12 @@
 A framework for extending Mumble servers with Rust.
 <sub><sup>(based on [murmur_grpc](https://github.com/chili-b/murmur_grpc))</sup></sub>
 
-### Required Software
+### Build Requirements
 * [cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
   * make sure you have rustfmt as well (can be installed with `rustup component add rustfmt`)
-* bash
+* bash (to run the `compile.sh` script)
+
+Pelecan outputs a single mostly statically linked binary once you've compiled it with your given modules.
 
 ### Usage
 
