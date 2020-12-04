@@ -5,6 +5,7 @@ pub use murmur_grpc::*;
 pub use persistent_trait::Persistent;
 
 fn main() {
+    env_logger::init();
     // ADD SERVERS TO THREAD POOL //
     std::thread::park();
 }
