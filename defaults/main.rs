@@ -6,6 +6,7 @@ pub use persistent_trait::Persistent;
 
 fn main() {
     env_logger::init();
-    // ADD SERVERS TO THREAD POOL //
+    let mut manager = ClientManager::new();
+    // ADD CONNECTION //
     std::thread::park();
 }

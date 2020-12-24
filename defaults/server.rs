@@ -1,16 +1,18 @@
 use crate::*;
 mod data;
 use data::Data;
+use std::sync::{Arc, Mutex};
 
 // MODULES //
 
-pub fn murmur_interface() -> MurmurInterface<&'static str, Data> {
+pub fn murmur_interface() -> MurmurInterface<Data> 
+{
     // SERVER NAME
     // SERVER ID
     // SERVER ADDR
     MurmurInterface {
-        t: DataMutex::new(Data::new(name)),
-        addr: server_addr,
+        t: Arc::new(Mutex::new(Data::new(name))),
+        addr: server_addr.to_string(),
         server_id: server_id,
         auto_reconnect: true,
         user_connected: vec![

@@ -149,7 +149,7 @@ for server_name in $(ls servers); do
 		insert_line "SERVER NAME" "let name = \"${server_name}\";" "${module_file}"
 		insert_line "SERVER ID" "let server_id = ${server_id};" "${module_file}"
 		insert_line "SERVER ADDR" "let server_addr = \"${server_address}\";" "${module_file}"
-		insert_line "ADD SERVERS TO THREAD POOL" "start_connection(servers::${server_name}::murmur_interface());" "pelecan/src/main.rs"
+		insert_line "ADD CONNECTION" "manager.start_connection(servers::${server_name}::murmur_interface());" "pelecan/src/main.rs"
 		while IFS= read -r line; do
 			enable_module "$line" "$server_name"
 		done < "$server/enabled_modules"
@@ -158,7 +158,7 @@ done
 
 cd pelecan
 cargo build --release
-killall pelecan
+killall pelecan 2&> /dev/null
 cp target/release/pelecan ../bin/pelecan
 cd ../
 strip bin/pelecan
