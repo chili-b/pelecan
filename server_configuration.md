@@ -11,7 +11,7 @@ server_id=1
 # server_address is the endpoint at which your Mumble server is listening for
 # gRPC connections. You should use the value below if you are running pelecan
 # and the Mumble server on the same device over the default port without TLS.
-server_address="http://127.0.0.1:50051"
+server_address="127.0.0.1:50051"
 ```
 
 `enabled_modules` should contain the name of a single subdirectory of the `/modules` directory on each line. 
