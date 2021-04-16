@@ -9,7 +9,7 @@ edition = "2018"
 [dependencies]
 log = "0.4.0"
 env_logger = "0.8.2"
-murmur_grpc = "2.0.5"
+murmur_grpc = "2.0.6"
 confy = "0.4.0"
 dirs = "3.0.1"
 serde = "^1.0"
