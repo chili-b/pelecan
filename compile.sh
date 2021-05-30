@@ -85,7 +85,7 @@ function add_data_variable {
 function add_dependency {
 	dependency=$1
 	name=$(echo "$dependency" | cut -f 1 -d = | xargs echo)
-	if ! grep -q $name pelecan/Cargo.toml; then
+	if ! grep -wq $name pelecan/Cargo.toml; then
 		insert_line 'DEPENDENCIES' "$dependency" pelecan/Cargo.toml
 	else
 		echo "${name} is already a dependency, so not added"
